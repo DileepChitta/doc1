@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="init.css">
+  <title>Name Validation Example</title>
+  
+</head>
+<body>
+
+  <div id="container1">
+
+      
+      <form id="formvalidate" onsubmit="return checkFormOnce()">
+        <h2>User Registration</h2>
+           <div id="container2">
+           <label for="name">Enter the Name:</label>
+           <input type="text" id="name" onchange="namecheck()" required>
+           <div id="nameError" class="form-text text-danger d-none">Name with atleast 5 letters.</div>
+
+           </div>
+
+           <div id="container2">
+           <label for="password">Enter the Password:</label>
+           <input type="password" id="password" onchange="passwordcheck()" required>
+           <div id="passwordError" class="form-text text-danger d-none">Password with atleast 8 character.</div>
+
+           </div>
+
+           <div id="container2">
+           <label for="confpassword">Confirm the Password:</label>
+           <input type="password" id="confpassword" onchange="validatepasswordcheck()" required>
+           <div id="confpasswordError" class="form-text text-danger d-none">Password do not match</div>
+
+           </div>
+
+          <div id="container2">
+           <label for="phone">Enter your PhoneNumber:</label>
+           <input type="tel" id="phone" onchange="phonecheck()" required>
+           <div id="phoneError" class="form-text text-danger d-none">Please enter the 10-digit valid phone number.</div>
+
+           </div>
+
+           <div id="container2">
+           <label for="email">Enter your Email:</label>
+           <input type="email" id="email" onchange="emailcheck()" required>
+           <div id="emailError" class="form-text text-danger d-none">please enter the valid email.</div>
+
+           </div>
+         
+          <button type="submit">Submit</button>
+
+      </form>
+
+  </div>
+
+  <script>
+    
+    function namecheck(){
+        const name=document.getElementById("name");
+        const nameval=name.value;
+        if(nameval.length<5){
+            document.getElementById("nameError").classList.remove("d-none");
+            return false;
+        }
+        else{
+            document.getElementById("nameError").classList.add("d-none");
+            return true;
+        }
+    }
+
+    function passwordcheck(){
+        const password=document.getElementById("password");
+        const passwordval=password.value;
+        if(passwordval.length<8 || passwordval.val==="1234567890"){
+            document.getElementById("passwordError").classList.remove("d-none");
+            return false;
+        }
+        else{
+            document.getElementById("passwordError").classList.add("d-none");
+            return true;
+        }
+    }
+
+    function validatepasswordcheck(){
+        const confpassword=document.getElementById("confpassword").value;
+        const password1=document.getElementById("password").value;
+        if(password1!==confpassword){
+            document.getElementById("confpasswordError").classList.remove("d-none");
+            return false;
+        }
+        else{
+            document.getElementById("confpasswordError").classList.add("d-none");
+            return true;
+        }
+       
+    }
+
+    function emailcheck(){
+        const email=document.getElementById("email");
+        const emailval=email.value;
+        if(!emailval.includes("@")){
+            document.getElementById("emailError").classList.remove("d-none");
+            return false;
+        }
+        else{
+            document.getElementById("emailError").classList.add("d-none");
+            return true;
+        }
+    }
+
+    function phonecheck(){
+        const phone=document.getElementById("phone");
+        phoneval=phone.value;
+        if(phoneval.length!==10 || isNaN(phoneval)){
+            document.getElementById("phoneError").classList.remove("d-none");
+            return false;
+        }
+        else{
+            document.getElementById("phoneError").classList.add("d-none");
+            return true;
+        }
+    }
+ 
+   function checkFormOnce(){
+       const nameinput=namecheck();
+       const passwordinput=passwordcheck();
+       const confpasswordinput=validateConfirmPassword();
+       const phoneinput=phonecheck();
+       const emailinput=emailcheck();
+
+       return (nameinput && passwordinput && confpasswordinput && phoneinput && emailinput);
+    }
+
+  </script>
+ 
+
+</body>
+</html>
